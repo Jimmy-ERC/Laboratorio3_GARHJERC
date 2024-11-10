@@ -8,15 +8,15 @@ package Entidades;
  *
  * @author elelt
  */
-public class Carreras {
+public class Carrera {
     private int IDCarrera;
     private String nombreCarrera;
     private String descripcion;
 
-    public Carreras() {
+    public Carrera() {
     }
 
-    public Carreras(int IDCarrera, String nombreCarrera, String descripcion) {
+    public Carrera(int IDCarrera, String nombreCarrera, String descripcion) {
         this.IDCarrera = IDCarrera;
         this.nombreCarrera = nombreCarrera;
         this.descripcion = descripcion;
@@ -45,6 +45,4 @@ public class Carreras {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
 }

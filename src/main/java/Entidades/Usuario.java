@@ -16,11 +16,14 @@ public class Usuario {
     private int edad;
     private String region;
     private String rol;
+    private String usuario;
+    private String contraseña;
 
     public Usuario() {
+        
     }
 
-    public Usuario(int IDUsuario, String nombre, String apellido, String email, int edad, String region, String rol) {
+    public Usuario(int IDUsuario, String nombre, String apellido, String email, int edad, String region, String rol, String usuario, String contraseña) {
         this.IDUsuario = IDUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -28,6 +31,19 @@ public class Usuario {
         this.edad = edad;
         this.region = region;
         this.rol = rol;
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+    }
+
+    public Usuario(String nombre, String apellido, String email, int edad, String region, String rol, String usuario, String contraseña) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.edad = edad;
+        this.region = region;
+        this.rol = rol;
+        this.usuario = usuario;
+        this.contraseña = contraseña;
     }
 
     public int getIDUsuario() {
@@ -85,5 +101,20 @@ public class Usuario {
     public void setRol(String rol) {
         this.rol = rol;
     }
-    
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
 }

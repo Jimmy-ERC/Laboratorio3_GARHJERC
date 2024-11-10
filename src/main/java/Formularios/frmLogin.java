@@ -4,6 +4,10 @@
  */
 package Formularios;
 
+import DAO.UsuarioDAO;
+import Entidades.Usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jimmy
@@ -13,8 +17,34 @@ public class frmLogin extends javax.swing.JFrame {
     /**
      * Creates new form frmLogin
      */
+    UsuarioDAO usuarioDAO;
+    Usuario usuario;
+
     public frmLogin() {
         initComponents();
+        setLocationRelativeTo(null);
+
+        usuarioDAO = new UsuarioDAO();
+    }
+
+    private void mostrarContraseña() {
+        if (this.chkVerContraseña.isSelected()) {
+            this.txtContraseña.setEchoChar((char) 0);
+        } else {
+            this.txtContraseña.setEchoChar('*');
+        }
+    }
+
+    private boolean validarCamposVacios() {
+        if (this.txtUsuario.getText().isEmpty() || this.txtUsuario.getText().isBlank()) {
+            return false;
+        }
+
+        if (this.txtContraseña.getText().isEmpty() || this.txtContraseña.getText().isBlank()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -26,34 +56,153 @@ public class frmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jLabel1 = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtContraseña = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        chkVerContraseña = new javax.swing.JCheckBox();
+        btnIniciarSesion = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        lblRegistrar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 559, Short.MAX_VALUE)
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
-        );
+        jLabel1.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
+        jLabel1.setText("Usuario:");
+
+        txtUsuario.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
+        jLabel2.setText("Contraseña:");
+
+        txtContraseña.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Montserrat Black", 0, 36)); // NOI18N
+        jLabel3.setText("Iniciar Sesión");
+
+        chkVerContraseña.setFont(new java.awt.Font("Montserrat Black", 0, 14)); // NOI18N
+        chkVerContraseña.setText("Ver Contraseña");
+        chkVerContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkVerContraseñaActionPerformed(evt);
+            }
+        });
+
+        btnIniciarSesion.setFont(new java.awt.Font("Montserrat Black", 0, 14)); // NOI18N
+        btnIniciarSesion.setText("Iniciar Sesión");
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSesionActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Montserrat Black", 0, 14)); // NOI18N
+        jLabel4.setText("¿No tienes una cuenta?");
+
+        lblRegistrar.setFont(new java.awt.Font("Montserrat Black", 0, 14)); // NOI18N
+        lblRegistrar.setForeground(new java.awt.Color(102, 102, 255));
+        lblRegistrar.setText("<html>\n<u>Regístrate</u>\n<html>");
+        lblRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegistrarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtUsuario)
+                        .addComponent(txtContraseña, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(chkVerContraseña)
+                            .addComponent(btnIniciarSesion)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(0, 115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jLabel3)
+                .addGap(128, 128, 128)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkVerContraseña)
+                .addGap(32, 32, 32)
+                .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lblRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void chkVerContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkVerContraseñaActionPerformed
+        // TODO add your handling code here:
+        mostrarContraseña();
+    }//GEN-LAST:event_chkVerContraseñaActionPerformed
+
+    private void lblRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarMouseClicked
+        // TODO add your handling code here:
+        frmRegistro registro = new frmRegistro();
+        registro.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblRegistrarMouseClicked
+
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+        // TODO add your handling code here:
+        if (validarCamposVacios()) {
+            String nombreUsuario = this.txtUsuario.getText();
+            String contraseña = this.txtContraseña.getText();
+
+            usuario = usuarioDAO.iniciarSesion(nombreUsuario, contraseña);
+
+            try {
+                switch (usuario.getRol()) {
+                    case "Administrador":
+                        frmAdministrador administrador = new frmAdministrador();
+                        administrador.setVisible(true);
+                        this.dispose();
+                        break;
+                    case "Estudiante":
+                        frmEstudiante estudiante = new frmEstudiante();
+                        estudiante.setVisible(true);
+                        this.dispose();
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "El usuario no existe", "¡¡ADVERTENCIA!!", JOptionPane.WARNING_MESSAGE);
+                        break;
+                }
+            } 
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "¡ERROR!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "No se permiten campos en blanco", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -91,6 +240,14 @@ public class frmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JCheckBox chkVerContraseña;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblRegistrar;
+    private javax.swing.JPasswordField txtContraseña;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
