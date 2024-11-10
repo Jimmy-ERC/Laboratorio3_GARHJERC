@@ -125,7 +125,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
 
     private boolean validarNombreSinNumeros() {
         try {
-            Integer.parseInt(this.txtNombre.getText());
+            int nombre = Integer.parseInt(this.txtNombre.getText());
             return false;
         } 
         catch (Exception e) {
@@ -135,11 +135,21 @@ public class frmUsuario extends javax.swing.JInternalFrame {
 
     private boolean validarApellidoSinNumeros() {
         try {
-            Integer.parseInt(this.txtApellido.getText());
+            int apellido = Integer.parseInt(this.txtApellido.getText());
             return false;
         } 
         catch (Exception e) {
             return true;
+        }
+    }
+    
+    private boolean validarEdad(){
+        try {
+            int edad = Integer.parseInt(this.txtEdad.getText());
+            return true;
+        } 
+        catch (Exception e) {
+            return false;
         }
     }
 
@@ -189,6 +199,8 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         txtContraseña = new javax.swing.JTextField();
         btnRecargar = new javax.swing.JButton();
+
+        setClosable(true);
 
         jtUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -284,6 +296,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
 
         txtUsuario.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
+        cbRol.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
         cbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Estudiante" }));
 
         jLabel12.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
@@ -312,7 +325,6 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,41 +332,38 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(32, 32, 32)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel9)
-                                            .addComponent(jLabel5)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jLabel12)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cbRol, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtRegion, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtContraseña)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtContraseña, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cbRol, javax.swing.GroupLayout.Alignment.TRAILING, 0, 280, Short.MAX_VALUE)
+                                    .addComponent(txtRegion, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtNombre)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)))))
+                                .addGap(32, 32, 32)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -419,7 +428,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
         // TODO add your handling code here:
-        if (validarCamposVacios() && validarNombreSinNumeros() && validarApellidoSinNumeros()) {
+        if (validarCamposVacios() && validarNombreSinNumeros() && validarApellidoSinNumeros() && validarEdad()) {
             Usuario usuario = new Usuario(
                     this.txtNombre.getText(),
                     this.txtApellido.getText(),
@@ -443,7 +452,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        if (validarCamposVacios() && validarNombreSinNumeros() && validarApellidoSinNumeros()) {
+        if (validarCamposVacios() && validarNombreSinNumeros() && validarApellidoSinNumeros() && validarEdad()) {
             Usuario usuario = new Usuario(
                     usuarioSeleccionado.getIDUsuario(),
                     this.txtNombre.getText(),

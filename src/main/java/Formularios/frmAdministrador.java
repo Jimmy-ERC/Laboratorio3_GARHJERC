@@ -20,6 +20,8 @@ public class frmAdministrador extends javax.swing.JFrame {
     
     public frmAdministrador() {
         initComponents();
+        
+        setLocationRelativeTo(null);
     }
     
     public frmAdministrador(Usuario usuario) {
@@ -69,11 +71,11 @@ public class frmAdministrador extends javax.swing.JFrame {
         jdpPrincipal.setLayout(jdpPrincipalLayout);
         jdpPrincipalLayout.setHorizontalGroup(
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1001, Short.MAX_VALUE)
+            .addGap(0, 1100, Short.MAX_VALUE)
         );
         jdpPrincipalLayout.setVerticalGroup(
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGap(0, 607, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Usuarios");
@@ -152,6 +154,8 @@ public class frmAdministrador extends javax.swing.JFrame {
 
     private void jmiCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCarrerasActionPerformed
         // TODO add your handling code here:
+        frmCarrera carrera = new frmCarrera();
+        abrirFormulario(carrera);
     }//GEN-LAST:event_jmiCarrerasActionPerformed
 
     private void jmiGraficoBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGraficoBarrasActionPerformed

@@ -22,6 +22,11 @@ public class Carrera {
         this.descripcion = descripcion;
     }
 
+    public Carrera(String nombreCarrera, String descripcion) {
+        this.nombreCarrera = nombreCarrera;
+        this.descripcion = descripcion;
+    }
+
     public int getIDCarrera() {
         return IDCarrera;
     }

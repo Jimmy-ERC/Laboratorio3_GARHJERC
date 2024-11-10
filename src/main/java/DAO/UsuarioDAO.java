@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
  * @author jimmy
  */
 public class UsuarioDAO {
-
     private cn CN;
 
     public UsuarioDAO() {
