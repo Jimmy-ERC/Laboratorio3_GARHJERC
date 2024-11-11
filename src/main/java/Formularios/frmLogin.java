@@ -17,8 +17,8 @@ public class frmLogin extends javax.swing.JFrame {
     /**
      * Creates new form frmLogin
      */
-    UsuarioDAO usuarioDAO;
-    Usuario usuario;
+    private UsuarioDAO usuarioDAO;
+    private Usuario usuario;
 
     public frmLogin() {
         initComponents();
@@ -181,12 +181,12 @@ public class frmLogin extends javax.swing.JFrame {
             try {
                 switch (usuario.getRol()) {
                     case "Administrador":
-                        frmAdministrador administrador = new frmAdministrador();
+                        frmAdministrador administrador = new frmAdministrador(usuario);
                         administrador.setVisible(true);
                         this.dispose();
                         break;
                     case "Estudiante":
-                        frmEstudiante estudiante = new frmEstudiante();
+                        frmEstudiante estudiante = new frmEstudiante(usuario);
                         estudiante.setVisible(true);
                         this.dispose();
                         break;

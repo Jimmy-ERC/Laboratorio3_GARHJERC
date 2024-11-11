@@ -54,42 +54,6 @@ public class UsuarioDAO {
         return listadoUsuarios;
     }
 
-    public Usuario iniciarSesion(String usuario, String contraseña) {
-        Usuario usuarioEncontrado = new Usuario();
-        String sSQL = "CALL sp_login(?, ?)";
-
-        usuarioEncontrado.setRol("");
-        
-        try {
-            CallableStatement cs = CN.getConexion().prepareCall(sSQL);
-
-            cs.setString(1, usuario);
-            cs.setString(2, contraseña);
-
-            ResultSet rs = cs.executeQuery();
-
-            while (rs.next()) {
-                usuarioEncontrado = new Usuario(
-                        rs.getInt("idusuario"),
-                        rs.getString("nombre"),
-                        rs.getString("apellido"),
-                        rs.getString("email"),
-                        rs.getInt("edad"),
-                        rs.getString("region"),
-                        rs.getString("rol"),
-                        rs.getString("usuario"),
-                        rs.getString("contraseña")
-                );
-            }
-
-            return usuarioEncontrado;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
-        }
-
-        return usuarioEncontrado;
-    }
-    
     public void insertarUsuario(Usuario usuario) {
         String sSQL = "CALL sp_insertar_usuario(?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -156,7 +120,7 @@ public class UsuarioDAO {
     
     public ArrayList buscarUsuarios(String nombreUsuario) {
         ArrayList<Usuario> listadoUsuarios = new ArrayList<>();
-        String sSQL = "{CALL sp_buscar_usuarios(?)}";
+        String sSQL = "CALL sp_buscar_usuarios(?)";
 
         try {
             CallableStatement cs = CN.getConexion().prepareCall(sSQL);
@@ -187,5 +151,61 @@ public class UsuarioDAO {
         }
 
         return listadoUsuarios;
+    }
+    
+    public Usuario iniciarSesion(String usuario, String contraseña) {
+        Usuario usuarioEncontrado = new Usuario();
+        String sSQL = "CALL sp_login(?, ?)";
+
+        usuarioEncontrado.setRol("");
+        
+        try {
+            CallableStatement cs = CN.getConexion().prepareCall(sSQL);
+
+            cs.setString(1, usuario);
+            cs.setString(2, contraseña);
+
+            ResultSet rs = cs.executeQuery();
+
+            while (rs.next()) {
+                usuarioEncontrado = new Usuario(
+                        rs.getInt("idusuario"),
+                        rs.getString("nombre"),
+                        rs.getString("apellido"),
+                        rs.getString("email"),
+                        rs.getInt("edad"),
+                        rs.getString("region"),
+                        rs.getString("rol"),
+                        rs.getString("usuario"),
+                        rs.getString("contraseña")
+                );
+            }
+
+            return usuarioEncontrado;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return usuarioEncontrado;
+    }
+    
+    public int obtenerUltimoIDUsuario(){
+        int IDUsuario = 0;        
+        String sSQL = "CALL sp_consultar_usuarios()";
+
+        try {
+            CallableStatement cs = CN.getConexion().prepareCall(sSQL);
+            ResultSet rs = cs.executeQuery();
+
+            while (rs.next()) {
+                IDUsuario = rs.getInt("idusuario");
+            }
+
+            return IDUsuario;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "¡ERROR!", JOptionPane.ERROR_MESSAGE);
+        }      
+        
+        return IDUsuario;
     }
 }

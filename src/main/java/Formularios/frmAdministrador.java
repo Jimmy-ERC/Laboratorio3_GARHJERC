@@ -62,6 +62,8 @@ public class frmAdministrador extends javax.swing.JFrame {
         jmiGraficoBarras = new javax.swing.JMenuItem();
         jmiGraficoPastel = new javax.swing.JMenuItem();
         jmiGraficoLineas = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jmiSalir = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -130,6 +132,18 @@ public class frmAdministrador extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setText("Cerra Sesión");
+
+        jmiSalir.setText("Salir");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSalirActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmiSalir);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,6 +184,13 @@ public class frmAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jmiGraficoLineasActionPerformed
 
+    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
+        // TODO add your handling code here:
+        frmLogin login = new frmLogin();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jmiSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,6 +230,7 @@ public class frmAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JDesktopPane jdpPrincipal;
@@ -216,6 +238,7 @@ public class frmAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiGraficoBarras;
     private javax.swing.JMenuItem jmiGraficoLineas;
     private javax.swing.JMenuItem jmiGraficoPastel;
+    private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JMenuItem jmiUsuarios;
     // End of variables declaration//GEN-END:variables
 }

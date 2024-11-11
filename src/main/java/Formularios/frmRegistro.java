@@ -4,6 +4,15 @@
  */
 package Formularios;
 
+import DAO.InteresesDAO;
+import DAO.UsuarioDAO;
+import Entidades.Carrera;
+import Entidades.Intereses;
+import Entidades.Usuario;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jimmy
@@ -13,12 +22,118 @@ public class frmRegistro extends javax.swing.JFrame {
     /**
      * Creates new form frmRegistro
      */
+    private ArrayList<Carrera> listadoCarrerasDeInteres;
+    private DefaultTableModel modeloCarreras;
+    private Carrera carreraSeleccionada;
+    private UsuarioDAO usuarioDAO;
+    private InteresesDAO interesesDAO;
+    
     public frmRegistro() {
         initComponents();
+        
+        listadoCarrerasDeInteres = new ArrayList<>();
+        modeloCarreras = (DefaultTableModel) this.jtCarreras.getModel();
+        carreraSeleccionada = null;
+        usuarioDAO = new UsuarioDAO();
+        interesesDAO = new InteresesDAO();
         
         setLocationRelativeTo(null);
     }
 
+    private void cargarCarrerasDeInteres() {
+        this.modeloCarreras.setRowCount(0);
+
+        for (int i = 0; i < this.listadoCarrerasDeInteres.size(); i++) {
+            Carrera carrera = this.listadoCarrerasDeInteres.get(i);
+
+            String[] data = {
+                String.valueOf(carrera.getIDCarrera()),
+                carrera.getNombreCarrera(),
+                carrera.getDescripcion()
+            };
+
+            this.modeloCarreras.addRow(data);
+        }
+
+        this.jtCarreras.setModel(modeloCarreras);
+    }
+    
+    public void añadirCarreraDeInteres(Carrera carrera){
+        listadoCarrerasDeInteres.add(carrera);
+        
+        cargarCarrerasDeInteres();
+    }
+    
+    private void eliminarCarreraDeInteres(int removerElemento){
+        listadoCarrerasDeInteres.remove(removerElemento);
+    }
+    
+    public boolean comprobarCarrera(Carrera carrera) {
+        for (Carrera c : listadoCarrerasDeInteres) {
+            if (c.getNombreCarrera().equals(carrera.getNombreCarrera())) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private boolean validarCamposVacios() {
+        if (this.txtNombre.getText().isEmpty() || this.txtNombre.getText().isBlank()) {
+            return false;
+        }
+
+        if (this.txtApellido.getText().isEmpty() || this.txtApellido.getText().isBlank()) {
+            return false;
+        }
+
+        if (this.txtEmail.getText().isEmpty() || this.txtEmail.getText().isBlank()) {
+            return false;
+        }
+
+        if (this.txtEdad.getText().isEmpty() || this.txtEdad.getText().isBlank()) {
+            return false;
+        }
+
+        if (this.txtRegion.getText().isEmpty() || this.txtRegion.getText().isBlank()) {
+            return false;
+        }
+
+        if (this.txtUsuario.getText().isEmpty() || this.txtUsuario.getText().isBlank()) {
+            return false;
+        }
+
+        if (this.txtContraseña.getText().isEmpty() || this.txtContraseña.getText().isBlank()) {
+            return false;
+        }
+
+        return true;
+    }
+    
+    private boolean validarEmail(){
+        if(this.txtEmail.getText().endsWith("@gmail.com")){
+            return true;
+        }       
+        
+        if(this.txtEmail.getText().endsWith("@yahoo.com")){
+            return true;
+        }
+        
+        if(this.txtEmail.getText().endsWith("@hotmail.com")){
+            return true;
+        }
+        
+        return false;
+    }
+
+    private void limpiarCampos() {
+        this.txtNombre.setText("");
+        this.txtApellido.setText("");
+        this.txtEmail.setText("");
+        this.txtEdad.setText("");
+        this.txtRegion.setText("");
+        this.txtUsuario.setText("");
+        this.txtContraseña.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,70 +143,73 @@ public class frmRegistro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel12 = new javax.swing.JLabel();
+        jdpPrincipal = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
         txtContraseña = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         txtRegion = new javax.swing.JTextField();
-        txtEdad = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtApellido = new javax.swing.JTextField();
+        txtEdad = new Clases.txtSoloNumeros();
+        txtEmail = new Clases.txtCorreo();
+        txtApellido = new Clases.txtSoloLetras();
+        txtNombre = new Clases.txtSoloLetras();
         jLabel5 = new javax.swing.JLabel();
-        txtNombreUsuario = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtCarreras = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        btnAgregarCategoria = new javax.swing.JButton();
-        btnEliminarCarrera = new javax.swing.JButton();
         btnRegistrase = new javax.swing.JButton();
+        btnEliminarCarrera = new javax.swing.JButton();
+        btnAgregarCategoria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel12.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
-        jLabel12.setText("Contraseña:");
-
         txtContraseña.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
-        jLabel11.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
-        jLabel11.setText("Usuario:");
-
         txtUsuario.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
-
-        jLabel8.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
-        jLabel8.setText("Región:");
 
         txtRegion.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
         txtEdad.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
-        jLabel7.setText("Edad:");
-
-        jLabel6.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
-        jLabel6.setText("Email:");
-
+        txtEmail.setToolTipText("");
         txtEmail.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
-        jLabel9.setText("Apellido:");
-
         txtApellido.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
+
+        txtNombre.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
         jLabel5.setText("Nombre:");
 
-        txtNombreUsuario.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
+        jLabel9.setText("Apellido:");
+
+        jLabel6.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
+        jLabel6.setText("Email:");
+
+        jLabel7.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
+        jLabel7.setText("Edad:");
+
+        jLabel8.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
+        jLabel8.setText("Región:");
+
+        jLabel11.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
+        jLabel11.setText("Usuario:");
+
+        jLabel12.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
+        jLabel12.setText("Contraseña:");
+
+        jLabel3.setFont(new java.awt.Font("Montserrat Black", 0, 36)); // NOI18N
+        jLabel3.setText("Seleccionar Intereses");
 
         jtCarreras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Carrera", "Descripción"
@@ -112,21 +230,7 @@ public class frmRegistro extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtCarreras);
 
-        jLabel3.setFont(new java.awt.Font("Montserrat Black", 0, 36)); // NOI18N
-        jLabel3.setText("Seleccionar Intereses");
-
-        btnAgregarCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarCategoriaActionPerformed(evt);
-            }
-        });
-
-        btnEliminarCarrera.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarCarreraActionPerformed(evt);
-            }
-        });
-
+        btnRegistrase.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
         btnRegistrase.setText("Crear Cuenta");
         btnRegistrase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,120 +238,230 @@ public class frmRegistro extends javax.swing.JFrame {
             }
         });
 
+        btnEliminarCarrera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eliminar.png"))); // NOI18N
+        btnEliminarCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCarreraActionPerformed(evt);
+            }
+        });
+
+        btnAgregarCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/añadir.png"))); // NOI18N
+        btnAgregarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarCategoriaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel8)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtContraseña, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtRegion, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnAgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnEliminarCarrera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(btnRegistrase, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(244, 244, 244)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(btnAgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(31, 31, 31)
+                        .addComponent(btnRegistrase, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
+        jdpPrincipal.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jdpPrincipalLayout = new javax.swing.GroupLayout(jdpPrincipal);
+        jdpPrincipal.setLayout(jdpPrincipalLayout);
+        jdpPrincipalLayout.setHorizontalGroup(
+            jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jdpPrincipalLayout.setVerticalGroup(
+            jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(txtContraseña)
-                    .addComponent(txtRegion)
-                    .addComponent(txtNombreUsuario))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnEliminarCarrera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(jLabel3)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(225, 225, 225)
-                        .addComponent(btnRegistrase, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jdpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
-                                        .addComponent(btnAgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnEliminarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(19, 19, 19)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel8)
-                                    .addComponent(txtRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addContainerGap(20, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegistrase, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))))
+                .addComponent(jdpPrincipal)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtCarrerasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCarrerasMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtCarrerasMouseClicked
-
     private void btnAgregarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCategoriaActionPerformed
         // TODO add your handling code here:
+        frmSeleccionarCarreraDeInteresDesdeRegistro seleccionarCarreraDeInteres = new frmSeleccionarCarreraDeInteresDesdeRegistro(this);
+        seleccionarCarreraDeInteres.setVisible(true);
+        this.jdpPrincipal.add(seleccionarCarreraDeInteres);
+        seleccionarCarreraDeInteres.toFront();
     }//GEN-LAST:event_btnAgregarCategoriaActionPerformed
 
     private void btnEliminarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCarreraActionPerformed
         // TODO add your handling code here:
+        if(carreraSeleccionada != null){            
+            int opcionSeleccionada = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la carrera" + carreraSeleccionada.getNombreCarrera() + " de sus intereses?", "¡Desea eliminar el usuario?", JOptionPane.YES_NO_OPTION);
+            
+            if (opcionSeleccionada == 0) {
+                eliminarCarreraDeInteres(this.jtCarreras.getSelectedRow());
+                cargarCarrerasDeInteres();
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Seleccione la carrera que quiere eliminar de sus intereses", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminarCarreraActionPerformed
 
     private void btnRegistraseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraseActionPerformed
         // TODO add your handling code here:
+        if(validarCamposVacios() && validarEmail()){
+            if(!listadoCarrerasDeInteres.isEmpty()){
+                Usuario usuarioNuevo = new Usuario(
+                        this.txtNombre.getText(),
+                        this.txtApellido.getText(),
+                        this.txtEmail.getText(),
+                        Integer.parseInt(this.txtEdad.getText()),
+                        this.txtRegion.getText(),
+                        "Estudiante",
+                        this.txtUsuario.getText(),
+                        this.txtContraseña.getText()
+                );
+                
+                usuarioDAO.insertarUsuario(usuarioNuevo);
+                
+                int IDUsuarioNuevo = usuarioDAO.obtenerUltimoIDUsuario();
+                
+                for(int i = 0; i < listadoCarrerasDeInteres.size(); i++){
+                    Intereses intereses = new Intereses(                    
+                            IDUsuarioNuevo,
+                            listadoCarrerasDeInteres.get(i).getIDCarrera()
+                    );
+                    
+                    interesesDAO.insertarInteres(intereses);
+                }
+                
+                frmLogin login = new frmLogin();
+                login.setVisible(true);
+                this.dispose();
+            }
+            else{          
+                JOptionPane.showMessageDialog(null, "Al menos debe agregar una carrera de interes", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+            }                
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistraseActionPerformed
+
+    private void jtCarrerasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCarrerasMouseClicked
+        // TODO add your handling code here:
+        int filaSeleccionada = this.jtCarreras.getSelectedRow();
+        
+        int IDCarrera = Integer.parseInt(String.valueOf(this.jtCarreras.getValueAt(filaSeleccionada, 0)));
+        String nombreCarrera = String.valueOf(this.jtCarreras.getValueAt(filaSeleccionada, 1));
+        String descripcion = String.valueOf(this.jtCarreras.getValueAt(filaSeleccionada, 2));
+
+        carreraSeleccionada = new Carrera(
+                IDCarrera,
+                nombreCarrera,
+                descripcion
+        );
+    }//GEN-LAST:event_jtCarrerasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -296,13 +510,15 @@ public class frmRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JDesktopPane jdpPrincipal;
     private javax.swing.JTable jtCarreras;
-    private javax.swing.JTextField txtApellido;
+    private Clases.txtSoloLetras txtApellido;
     private javax.swing.JTextField txtContraseña;
-    private javax.swing.JTextField txtEdad;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtNombreUsuario;
+    private Clases.txtSoloNumeros txtEdad;
+    private Clases.txtCorreo txtEmail;
+    private Clases.txtSoloLetras txtNombre;
     private javax.swing.JTextField txtRegion;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

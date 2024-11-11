@@ -17,6 +17,7 @@ public class frmEstudiante extends javax.swing.JFrame {
      * Creates new form frmEstudiante
      */
     private JInternalFrame formularioActual;
+    private Usuario usuario;
     
     public frmEstudiante() {
         initComponents();
@@ -25,6 +26,7 @@ public class frmEstudiante extends javax.swing.JFrame {
     public frmEstudiante(Usuario usuario) {
         initComponents();
         
+        this.usuario = usuario;
         setLocationRelativeTo(null);
     }
     
@@ -38,6 +40,10 @@ public class frmEstudiante extends javax.swing.JFrame {
         nuevoFormulario.toFront();
         
         formularioActual = nuevoFormulario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     /**
@@ -59,6 +65,8 @@ public class frmEstudiante extends javax.swing.JFrame {
         jmiConsultarCarreras = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jmiIntereses = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jmiSalir = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -70,16 +78,21 @@ public class frmEstudiante extends javax.swing.JFrame {
         jdpPrincipal.setLayout(jdpPrincipalLayout);
         jdpPrincipalLayout.setHorizontalGroup(
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGap(0, 1100, Short.MAX_VALUE)
         );
         jdpPrincipalLayout.setVerticalGroup(
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGap(0, 607, Short.MAX_VALUE)
         );
 
         jMenu3.setText("Perfil");
 
         jmiPerfil.setText("Perfil");
+        jmiPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPerfilActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmiPerfil);
 
         jMenuBar2.add(jMenu3);
@@ -87,6 +100,11 @@ public class frmEstudiante extends javax.swing.JFrame {
         jMenu4.setText("Carreras");
 
         jmiConsultarCarreras.setText("Consultar Carreras");
+        jmiConsultarCarreras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiConsultarCarrerasActionPerformed(evt);
+            }
+        });
         jMenu4.add(jmiConsultarCarreras);
 
         jMenuBar2.add(jMenu4);
@@ -94,9 +112,26 @@ public class frmEstudiante extends javax.swing.JFrame {
         jMenu6.setText("Intereses");
 
         jmiIntereses.setText("Intereses");
+        jmiIntereses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiInteresesActionPerformed(evt);
+            }
+        });
         jMenu6.add(jmiIntereses);
 
         jMenuBar2.add(jMenu6);
+
+        jMenu1.setText("Cerrar Sesión");
+
+        jmiSalir.setText("Salir");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiSalir);
+
+        jMenuBar2.add(jMenu1);
 
         setJMenuBar(jMenuBar2);
 
@@ -113,6 +148,31 @@ public class frmEstudiante extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmiPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPerfilActionPerformed
+        // TODO add your handling code here:
+        frmPerfil perfil = new frmPerfil(this, this.usuario);
+        abrirFormulario(perfil);
+    }//GEN-LAST:event_jmiPerfilActionPerformed
+
+    private void jmiConsultarCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConsultarCarrerasActionPerformed
+        // TODO add your handling code here:
+        frmConsultarCarerras carreras = new frmConsultarCarerras();
+        abrirFormulario(carreras);
+    }//GEN-LAST:event_jmiConsultarCarrerasActionPerformed
+
+    private void jmiInteresesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInteresesActionPerformed
+        // TODO add your handling code here:
+        frmIntereses intereses = new frmIntereses(usuario);
+        abrirFormulario(intereses);
+    }//GEN-LAST:event_jmiInteresesActionPerformed
+
+    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
+        // TODO add your handling code here:
+        frmLogin login = new frmLogin();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jmiSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,6 +210,7 @@ public class frmEstudiante extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -160,5 +221,6 @@ public class frmEstudiante extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiConsultarCarreras;
     private javax.swing.JMenuItem jmiIntereses;
     private javax.swing.JMenuItem jmiPerfil;
+    private javax.swing.JMenuItem jmiSalir;
     // End of variables declaration//GEN-END:variables
 }

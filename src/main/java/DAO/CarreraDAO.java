@@ -101,7 +101,7 @@ public class CarreraDAO {
     
     public ArrayList buscarCarreras(String nombreCarrera) {
         ArrayList<Carrera> listadoCarreras = new ArrayList<>();
-        String sSQL = "{CALL sp_buscar_carreras(?)}";
+        String sSQL = "CALL sp_buscar_carreras(?)";
 
         try {
             CallableStatement cs = CN.getConexion().prepareCall(sSQL);
