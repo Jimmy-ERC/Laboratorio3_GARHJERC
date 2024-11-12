@@ -174,14 +174,20 @@ public class frmAdministrador extends javax.swing.JFrame {
 
     private void jmiGraficoBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGraficoBarrasActionPerformed
         // TODO add your handling code here:
+        frmGraficoDeBarra graficoDeBarra = new frmGraficoDeBarra();
+        abrirFormulario(graficoDeBarra);
     }//GEN-LAST:event_jmiGraficoBarrasActionPerformed
 
     private void jmiGraficoPastelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGraficoPastelActionPerformed
         // TODO add your handling code here:
+        frmGraficoDePastel graficoDePastel = new frmGraficoDePastel();
+        abrirFormulario(graficoDePastel);
     }//GEN-LAST:event_jmiGraficoPastelActionPerformed
 
     private void jmiGraficoLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGraficoLineasActionPerformed
         // TODO add your handling code here:
+        frmGraficoDeLinea graficoDeLinea = new frmGraficoDeLinea();
+        abrirFormulario(graficoDeLinea);
     }//GEN-LAST:event_jmiGraficoLineasActionPerformed
 
     private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed

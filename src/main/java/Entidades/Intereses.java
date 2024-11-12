@@ -14,11 +14,13 @@ public class Intereses {
     private int IDInteres;
     private int IDUsuario;
     private int IDCarrera;
+    private int cantidad;
     private String nombreCarrera;
     private String descripcion;
-    private Date fechaSeleccion;
+    private Date fechaSeleccion;    
 
     public Intereses() {
+        
     }
 
     public Intereses(int IDUsuario, int IDCarrera) {
@@ -26,6 +28,16 @@ public class Intereses {
         this.IDCarrera = IDCarrera;
     }   
 
+    public Intereses(int cantidad, Date fechaSeleccion) {
+        this.cantidad = cantidad;
+        this.fechaSeleccion = fechaSeleccion;
+    }
+
+    public Intereses(int cantidad, String nombreCarrera) {
+        this.cantidad = cantidad;
+        this.nombreCarrera = nombreCarrera;
+    }
+    
     public Intereses(int IDInteres, String nombreCarrera, String descripcion) {
         this.IDInteres = IDInteres;
         this.nombreCarrera = nombreCarrera;
@@ -62,6 +74,14 @@ public class Intereses {
     public void setIDCarrera(int IDCarrera) {
         this.IDCarrera = IDCarrera;
     }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }    
 
     public Date getFechaSeleccion() {
         return fechaSeleccion;

@@ -184,7 +184,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtEdad = new Clases.txtSoloNumeros();
         txtNombre = new Clases.txtSoloLetras();
         txtApellido = new Clases.txtSoloLetras();
-        txtEmail = new Clases.txtCorreo();
+        txtEmail = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -297,7 +297,6 @@ public class frmUsuario extends javax.swing.JInternalFrame {
 
         txtApellido.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
-        txtEmail.setToolTipText("");
         txtEmail.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -335,11 +334,11 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtEdad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -347,11 +346,11 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtUsuario)
                                     .addComponent(cbRol, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtRegion)
-                                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtContraseña))))
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(212, 212, 212)
@@ -561,7 +560,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBuscarUsuario;
     private javax.swing.JTextField txtContraseña;
     private Clases.txtSoloNumeros txtEdad;
-    private Clases.txtCorreo txtEmail;
+    private javax.swing.JTextField txtEmail;
     private Clases.txtSoloLetras txtNombre;
     private javax.swing.JTextField txtRegion;
     private javax.swing.JTextField txtUsuario;

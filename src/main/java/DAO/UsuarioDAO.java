@@ -77,7 +77,7 @@ public class UsuarioDAO {
         }
     }
     
-    public void editarUsuario(Usuario usuario) {
+    public boolean editarUsuario(Usuario usuario) {
         String sSQL = "CALL sp_actualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try{
@@ -96,10 +96,13 @@ public class UsuarioDAO {
             cs.executeUpdate();
             
             JOptionPane.showMessageDialog(null, "El usuario se ha EDITADO correctamente", "Operación exitosa", JOptionPane.INFORMATION_MESSAGE);
+            return true;
         } 
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
         }
+        
+        return false;
     }
     
     public void eliminarUsuario(int IDUsuario) {

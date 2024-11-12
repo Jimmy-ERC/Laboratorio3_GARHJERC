@@ -219,16 +219,21 @@ public class frmIntereses extends javax.swing.JInternalFrame {
 
     private void btnEliminarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCarreraActionPerformed
         // TODO add your handling code here:
-        if(interesSeleccionado != null){
-            int opcionSeleccionada = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la carrera" + interesSeleccionado.getNombreCarrera() + " de sus intereses?", "¡Desea eliminar el usuario?", JOptionPane.YES_NO_OPTION);
+        if(listadoCarrerasDeInteres.size() != 1){
+            if(interesSeleccionado != null){
+                int opcionSeleccionada = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la carrera" + interesSeleccionado.getNombreCarrera() + " de sus intereses?", "¡Desea eliminar el usuario?", JOptionPane.YES_NO_OPTION);
 
-            if (opcionSeleccionada == 0) {
-                interesesDAO.eliminarInteres(interesSeleccionado.getIDInteres());
-                cargarCarrerasDeInteres();
+                if (opcionSeleccionada == 0) {
+                    interesesDAO.eliminarInteres(interesSeleccionado.getIDInteres());
+                    cargarCarrerasDeInteres();
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Seleccione la carrera que quiere eliminar de sus intereses", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
             }
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Seleccione la carrera que quiere eliminar de sus intereses", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+        else{            
+            JOptionPane.showMessageDialog(null, "Usted debe tener al menos una carrera de interes", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarCarreraActionPerformed
 

@@ -242,11 +242,17 @@ public class frmPerfil extends javax.swing.JInternalFrame {
                 this.txtContraseña.getText()
             );
 
-            usuarioDAO.editarUsuario(usuario);            
-            this.usuario = usuario;
-            frmPadre.setUsuario(this.usuario);
+            try {
+                if(usuarioDAO.editarUsuario(usuario)){
+                    this.usuario = usuario;
+                    frmPadre.setUsuario(this.usuario);
             
-            mostrarDatosDelUsuario();
+                    mostrarDatosDelUsuario();
+                }                
+            } 
+            catch (Exception e) {
+                
+            }
         }
         else {
             JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
