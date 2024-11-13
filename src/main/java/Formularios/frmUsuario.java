@@ -33,6 +33,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         usuarioSeleccionado = null;
 
         this.cbRol.setSelectedIndex(-1);
+        this.cbRegion.setSelectedIndex(-1);
 
         cargarUsuarios();
     }
@@ -104,7 +105,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
             return false;
         }
 
-        if (this.txtRegion.getText().isEmpty() || this.txtRegion.getText().isBlank()) {
+        if (this.cbRegion.getSelectedIndex() < 0) {
             return false;
         }
 
@@ -144,7 +145,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         this.txtApellido.setText("");
         this.txtEmail.setText("");
         this.txtEdad.setText("");
-        this.txtRegion.setText("");
+        this.cbRegion.setSelectedIndex(-1);
         this.cbRol.setSelectedIndex(-1);
         this.txtUsuario.setText("");
         this.txtContraseña.setText("");
@@ -175,7 +176,6 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txtRegion = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
         cbRol = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
@@ -185,6 +185,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtNombre = new Clases.txtSoloLetras();
         txtApellido = new Clases.txtSoloLetras();
         txtEmail = new javax.swing.JTextField();
+        cbRegion = new javax.swing.JComboBox<>();
 
         setClosable(true);
 
@@ -271,8 +272,6 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Montserrat Black", 0, 18)); // NOI18N
         jLabel11.setText("Usuario:");
 
-        txtRegion.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
-
         txtUsuario.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
         cbRol.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
@@ -298,6 +297,9 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtApellido.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
         txtEmail.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
+
+        cbRegion.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
+        cbRegion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Central", "Occidental", "Oriental" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -349,8 +351,8 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtUsuario)
                                     .addComponent(cbRol, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtRegion)
-                                    .addComponent(txtContraseña))))
+                                    .addComponent(txtContraseña)
+                                    .addComponent(cbRegion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(212, 212, 212)
@@ -390,7 +392,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(txtRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
@@ -424,7 +426,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                     this.txtApellido.getText(),
                     this.txtEmail.getText(),
                     Integer.parseInt(this.txtEdad.getText()),
-                    this.txtRegion.getText(),
+                    this.cbRegion.getSelectedItem().toString(),
                     this.cbRol.getSelectedItem().toString(),
                     this.txtUsuario.getText(),
                     this.txtContraseña.getText()
@@ -449,7 +451,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                     this.txtApellido.getText(),
                     this.txtEmail.getText(),
                     Integer.parseInt(this.txtEdad.getText()),
-                    this.txtRegion.getText(),
+                    this.cbRegion.getSelectedItem().toString(),
                     this.cbRol.getSelectedItem().toString(),
                     this.txtUsuario.getText(),
                     this.txtContraseña.getText()
@@ -522,7 +524,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         this.txtApellido.setText(apellido);
         this.txtEmail.setText(email);
         this.txtEdad.setText(String.valueOf(edad));
-        this.txtRegion.setText(region);
+        this.cbRegion.setSelectedItem(region);
         this.cbRol.setSelectedItem(rol);
         this.txtUsuario.setText(usuario);
         this.txtContraseña.setText(contraseña);
@@ -543,6 +545,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnInsertar;
     private javax.swing.JButton btnRecargar;
+    private javax.swing.JComboBox<String> cbRegion;
     private javax.swing.JComboBox<String> cbRol;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -562,7 +565,6 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     private Clases.txtSoloNumeros txtEdad;
     private javax.swing.JTextField txtEmail;
     private Clases.txtSoloLetras txtNombre;
-    private javax.swing.JTextField txtRegion;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

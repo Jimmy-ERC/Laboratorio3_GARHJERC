@@ -94,7 +94,7 @@ public class frmRegistro extends javax.swing.JFrame {
             return false;
         }
 
-        if (this.txtRegion.getText().isEmpty() || this.txtRegion.getText().isBlank()) {
+        if (this.cbRegion.getSelectedIndex() < 0) {
             return false;
         }
 
@@ -125,15 +125,6 @@ public class frmRegistro extends javax.swing.JFrame {
         return false;
     }
 
-    private void limpiarCampos() {
-        this.txtNombre.setText("");
-        this.txtApellido.setText("");
-        this.txtEmail.setText("");
-        this.txtEdad.setText("");
-        this.txtRegion.setText("");
-        this.txtUsuario.setText("");
-        this.txtContraseña.setText("");
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,9 +138,7 @@ public class frmRegistro extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         txtContraseña = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
-        txtRegion = new javax.swing.JTextField();
         txtEdad = new Clases.txtSoloNumeros();
-        txtEmail = new Clases.txtCorreo();
         txtApellido = new Clases.txtSoloLetras();
         txtNombre = new Clases.txtSoloLetras();
         jLabel5 = new javax.swing.JLabel();
@@ -165,6 +154,8 @@ public class frmRegistro extends javax.swing.JFrame {
         btnRegistrase = new javax.swing.JButton();
         btnEliminarCarrera = new javax.swing.JButton();
         btnAgregarCategoria = new javax.swing.JButton();
+        txtEmail = new javax.swing.JTextField();
+        cbRegion = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -172,12 +163,7 @@ public class frmRegistro extends javax.swing.JFrame {
 
         txtUsuario.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
-        txtRegion.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
-
         txtEdad.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
-
-        txtEmail.setToolTipText("");
-        txtEmail.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
         txtApellido.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
 
@@ -252,6 +238,11 @@ public class frmRegistro extends javax.swing.JFrame {
             }
         });
 
+        txtEmail.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
+
+        cbRegion.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
+        cbRegion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Central", "Occidental", "Oriental" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -275,14 +266,14 @@ public class frmRegistro extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(txtContraseña, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtRegion, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbRegion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -313,8 +304,8 @@ public class frmRegistro extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(69, 69, 69)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)))
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -326,8 +317,8 @@ public class frmRegistro extends javax.swing.JFrame {
                             .addComponent(jLabel7))
                         .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel8)
+                            .addComponent(cbRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -372,7 +363,7 @@ public class frmRegistro extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jdpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,7 +407,7 @@ public class frmRegistro extends javax.swing.JFrame {
                         this.txtApellido.getText(),
                         this.txtEmail.getText(),
                         Integer.parseInt(this.txtEdad.getText()),
-                        this.txtRegion.getText(),
+                        this.cbRegion.getSelectedItem().toString(),
                         "Estudiante",
                         this.txtUsuario.getText(),
                         this.txtContraseña.getText()
@@ -502,6 +493,7 @@ public class frmRegistro extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarCategoria;
     private javax.swing.JButton btnEliminarCarrera;
     private javax.swing.JButton btnRegistrase;
+    private javax.swing.JComboBox<String> cbRegion;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
@@ -517,9 +509,8 @@ public class frmRegistro extends javax.swing.JFrame {
     private Clases.txtSoloLetras txtApellido;
     private javax.swing.JTextField txtContraseña;
     private Clases.txtSoloNumeros txtEdad;
-    private Clases.txtCorreo txtEmail;
+    private javax.swing.JTextField txtEmail;
     private Clases.txtSoloLetras txtNombre;
-    private javax.swing.JTextField txtRegion;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
