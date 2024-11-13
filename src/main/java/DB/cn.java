@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
  * @author elelt
  */
 public class cn {
-
     Connection conexion;
 
     public Connection getConexion() {

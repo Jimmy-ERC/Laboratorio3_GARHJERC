@@ -5,27 +5,25 @@
 package DAO;
 
 import DB.cn;
-import Entidades.Intereses;
+import Entidades.Interes;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author jimmy
  */
-public class InteresesDAO {
+public class InteresDAO {
     private cn CN;
 
-    public InteresesDAO() {
+    public InteresDAO() {
         CN = new cn();
     }
     
     public ArrayList consultarIntereses(int IDUsuario) {
-        ArrayList<Intereses> listadoIntereses = new ArrayList<>();
+        ArrayList<Interes> listadoIntereses = new ArrayList<>();
         String sSQL = "CALL sp_consultar_intereses(?)";
 
         try {
@@ -36,7 +34,7 @@ public class InteresesDAO {
             ResultSet rs = cs.executeQuery();
             
             while (rs.next()) {
-                Intereses interes = new Intereses(
+                Interes interes = new Interes(
                         rs.getInt("idinteres"),
                         rs.getString("nombre_carrera"),
                         rs.getString("descripcion")
@@ -53,7 +51,7 @@ public class InteresesDAO {
         return listadoIntereses;
     }
     
-    public void insertarInteres(Intereses intereses) {
+    public void insertarInteres(Interes intereses) {
         String sSQL = "CALL sp_insertar_interes(?, ?)";
 
         try {
@@ -84,22 +82,19 @@ public class InteresesDAO {
         }
     }
     
-    public ArrayList consultarInteresadosPorFecha(int IDCarrera, Date fechaInicio, Date fechaFin){
-        ArrayList<Intereses> listadoDeInteresesPorFecha = new ArrayList<>();
-        String sSQL = "CALL sp_consultar_interesados_por_fecha(?, ?, ?)";        
-        SimpleDateFormat sfd = new SimpleDateFormat("YYYY-MM-dd");
+    public ArrayList consultarInteresadosPorFecha(int IDCarrera){
+        ArrayList<Interes> listadoDeInteresesPorFecha = new ArrayList<>();
+        String sSQL = "CALL sp_consultar_interesados_por_fecha(?)";
 
         try{
             CallableStatement cs = CN.getConexion().prepareCall(sSQL);
 
             cs.setInt(1, IDCarrera);
-            cs.setString(2, sfd.format(fechaInicio));
-            cs.setString(3, sfd.format(fechaFin));
 
             ResultSet rs = cs.executeQuery();
             
             while (rs.next()) {
-                Intereses interes = new Intereses(
+                Interes interes = new Interes(
                         rs.getInt("cantidad_interesados"),
                         rs.getDate("fecha_seleccion")
                 );
@@ -116,7 +111,7 @@ public class InteresesDAO {
     }
     
     public ArrayList consultarCantidadInteresados() {
-        ArrayList<Intereses> listadoCantidadIntereses = new ArrayList<>();
+        ArrayList<Interes> listadoCantidadIntereses = new ArrayList<>();
         String sSQL = "CALL sp_consultar_cantidad_interesados()";
 
         try {
@@ -125,8 +120,35 @@ public class InteresesDAO {
             ResultSet rs = cs.executeQuery();
             
             while (rs.next()) {
-                Intereses interes = new Intereses(
+                Interes interes = new Interes(
                         rs.getInt("cantidad"),
+                        rs.getString("nombre_carrera")                        
+                );
+
+                listadoCantidadIntereses.add(interes);
+            }
+
+            return listadoCantidadIntereses;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return listadoCantidadIntereses;
+    }
+    
+    public ArrayList consultarLas15CarrerasConMasInteresados() {
+        ArrayList<Interes> listadoCantidadIntereses = new ArrayList<>();
+        String sSQL = "CALL sp_consultar_las_15_carreras_mas_interesantes()";
+
+        try {
+            CallableStatement cs = CN.getConexion().prepareCall(sSQL);
+            
+            ResultSet rs = cs.executeQuery();
+            
+            while (rs.next()) {
+                Interes interes = new Interes(
+                        rs.getInt("idcarrera"),
+                        rs.getInt("cantidad_interesados"),
                         rs.getString("nombre_carrera")                        
                 );
 

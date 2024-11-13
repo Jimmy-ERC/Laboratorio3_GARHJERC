@@ -4,15 +4,12 @@
  */
 package Formularios;
 
-import DAO.CarreraDAO;
-import DAO.InteresesDAO;
-import Entidades.Carrera;
-import Entidades.Intereses;
+import DAO.InteresDAO;
+import Entidades.Interes;
 import java.awt.BorderLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -32,24 +29,24 @@ public class frmGraficoDeLinea extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmGraficoDeLinea
      */
-    ArrayList<Carrera> listadoCarreras;
-    ArrayList<Intereses> listadoInteresadoPorFecha;
-    CarreraDAO carreraDAO;
-    InteresesDAO interesesDAO;
+    private ArrayList<Interes> listadoCarreras;
+    private ArrayList<Interes> listadoInteresadoPorFecha;
+    private InteresDAO interesesDAO;
 
     public frmGraficoDeLinea() {
         initComponents();
-
-        carreraDAO = new CarreraDAO();
-        interesesDAO = new InteresesDAO();
+        
+        interesesDAO = new InteresDAO();
+        
         cargarCarreras();
+        cargarGrafico();
     }
 
     private void cargarCarreras() {
-        listadoCarreras = carreraDAO.consultarCarreras();
+        listadoCarreras = interesesDAO.consultarLas15CarrerasConMasInteresados();
     }
 
-    private TimeSeriesCollection cargarInteresados(Date fechaInicio, Date fechaFin) {
+    private TimeSeriesCollection cargarInteresados() {
         TimeSeriesCollection datos = new TimeSeriesCollection();
 
         for (int i = 0; i < listadoCarreras.size(); i++) {
@@ -57,7 +54,7 @@ public class frmGraficoDeLinea extends javax.swing.JInternalFrame {
             String nombreCarrera = listadoCarreras.get(i).getNombreCarrera();
             TimeSeries serie = new TimeSeries(nombreCarrera);
 
-            listadoInteresadoPorFecha = interesesDAO.consultarInteresadosPorFecha(IDCarrera, fechaInicio, fechaFin);
+            listadoInteresadoPorFecha = interesesDAO.consultarInteresadosPorFecha(IDCarrera);
 
             for (int j = 0; j < listadoInteresadoPorFecha.size(); j++) {
                 Date fecha = listadoInteresadoPorFecha.get(j).getFechaSeleccion();
@@ -68,11 +65,39 @@ public class frmGraficoDeLinea extends javax.swing.JInternalFrame {
 
                 serie.add(dia, cantidad);
             }
-            
+
             datos.addSeries(serie);
         }
 
         return datos;
+    }
+    
+    private void cargarGrafico(){
+        TimeSeriesCollection datos = cargarInteresados();
+
+        JFreeChart graficoDeLinea = ChartFactory.createTimeSeriesChart(
+                "Evolución del interes de cada carrera", //Título
+                "Fecha", //Título del X label
+                "Cantidad de interesados", //Título del Y label
+                datos, //Datos
+                true, //Nombre de las categorias
+                true, //Herramientas
+                false //URL del gráfico
+        );
+
+        XYPlot plot = (XYPlot) graficoDeLinea.getPlot();
+        DateAxis axis = (DateAxis) plot.getDomainAxis();
+        axis.setDateFormatOverride(new SimpleDateFormat("dd-MM-yyyy"));
+
+        ChartPanel panel = new ChartPanel(graficoDeLinea, false);
+        panel.setMouseWheelEnabled(true);
+        panel.setBounds(10, 20, 940, 608);
+
+        this.jpGrafico.setLayout(new BorderLayout());
+        this.jpGrafico.add(panel, BorderLayout.NORTH);
+
+        pack();
+        repaint();
     }
 
     /**
@@ -84,130 +109,37 @@ public class frmGraficoDeLinea extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jcFechaInicio = new com.toedter.calendar.JCalendar();
-        jcFechaFin = new com.toedter.calendar.JCalendar();
-        btnGraficar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jpGrafico = new javax.swing.JPanel();
 
         setClosable(true);
-
-        btnGraficar.setFont(new java.awt.Font("Montserrat Black", 0, 14)); // NOI18N
-        btnGraficar.setText("Graficar");
-        btnGraficar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGraficarActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
-        jLabel4.setText("Fecha Inicio");
-
-        jLabel5.setFont(new java.awt.Font("Montserrat Black", 0, 16)); // NOI18N
-        jLabel5.setText("Fecha Fin");
 
         javax.swing.GroupLayout jpGraficoLayout = new javax.swing.GroupLayout(jpGrafico);
         jpGrafico.setLayout(jpGraficoLayout);
         jpGraficoLayout.setHorizontalGroup(
             jpGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 938, Short.MAX_VALUE)
         );
         jpGraficoLayout.setVerticalGroup(
             jpGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 408, Short.MAX_VALUE)
+            .addGap(0, 614, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jLabel4)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(jLabel5)
-                        .addGap(21, 339, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))))
             .addComponent(jpGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnGraficar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)))
-                .addGap(20, 20, 20))
+            .addComponent(jpGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
-        // TODO add your handling code here:
-        Date fechaInicio = this.jcFechaInicio.getDate();
-        Date fechaFin = this.jcFechaFin.getDate();
-
-        if (fechaFin.compareTo(fechaInicio) > 0) {
-            TimeSeriesCollection datos = cargarInteresados(fechaInicio, fechaFin);
-
-            JFreeChart graficoDeLinea = ChartFactory.createTimeSeriesChart(
-                    "Evolución del interes de cada carrera",    //Título
-                    "Fecha",                                    //Título del X label
-                    "Cantidad de interesados",                  //Título del Y label
-                    datos,                                      //Datos
-                    true,                                       //Nombre de las categorias
-                    true,                                       //Herramientas
-                    false                                       //URL del gráfico
-            );
-
-            XYPlot plot = (XYPlot) graficoDeLinea.getPlot();
-            DateAxis axis = (DateAxis) plot.getDomainAxis();
-            axis.setDateFormatOverride(new SimpleDateFormat("dd-MM-yyyy"));
-
-            ChartPanel panel = new ChartPanel(graficoDeLinea, false);
-            panel.setMouseWheelEnabled(true);
-            panel.setBounds(10, 20, 940, 405);
-
-            this.jpGrafico.setLayout(new BorderLayout());
-            this.jpGrafico.add(panel, BorderLayout.NORTH);
-
-            pack();
-            repaint(); //Estas lineas de código es para asegurarse de que el gráfico no se borre.
-        } else {
-            JOptionPane.showMessageDialog(null, "La fecha de inicio no puede ser mayor que la fecha fin.", "¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnGraficarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGraficar;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private com.toedter.calendar.JCalendar jcFechaFin;
-    private com.toedter.calendar.JCalendar jcFechaInicio;
     private javax.swing.JPanel jpGrafico;
     // End of variables declaration//GEN-END:variables
 }

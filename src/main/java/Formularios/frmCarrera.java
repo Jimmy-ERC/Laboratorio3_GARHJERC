@@ -345,7 +345,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
                 this.txtDescripcion.getText()
             );
 
-            carreraDAO.editarUsuario(carrera);
+            carreraDAO.editarCarrera(carrera);
 
             cargarCarreras();
             limpiarCampos();

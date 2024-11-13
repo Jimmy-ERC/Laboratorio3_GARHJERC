@@ -64,7 +64,7 @@ public class CarreraDAO {
         }
     }
     
-    public void editarUsuario(Carrera carrera) {
+    public void editarCarrera(Carrera carrera) {
         String sSQL = "CALL sp_actualizar_carrera(?, ?, ?)";
 
         try{

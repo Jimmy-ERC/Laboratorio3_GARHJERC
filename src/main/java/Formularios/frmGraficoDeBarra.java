@@ -4,8 +4,8 @@
  */
 package Formularios;
 
-import DAO.InteresesDAO;
-import Entidades.Intereses;
+import DAO.InteresDAO;
+import Entidades.Interes;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -24,14 +24,14 @@ public class frmGraficoDeBarra extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmGraficoDeBarra
      */
-    private InteresesDAO interesDAO;
-    private ArrayList<Intereses> listadoIntereses;
+    private InteresDAO interesDAO;
+    private ArrayList<Interes> listadoIntereses;
     
     public frmGraficoDeBarra() {
         initComponents();
         
-        interesDAO = new InteresesDAO();
-        listadoIntereses = interesDAO.consultarCantidadInteresados();
+        interesDAO = new InteresDAO();
+        listadoIntereses = interesDAO.consultarLas15CarrerasConMasInteresados();
         
         cargarGrafico(); 
     }

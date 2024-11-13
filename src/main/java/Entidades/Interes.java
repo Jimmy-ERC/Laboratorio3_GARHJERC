@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author elelt
  */
-public class Intereses {
+public class Interes {
     private int IDInteres;
     private int IDUsuario;
     private int IDCarrera;
@@ -19,32 +19,38 @@ public class Intereses {
     private String descripcion;
     private Date fechaSeleccion;    
 
-    public Intereses() {
+    public Interes() {
         
     }
 
-    public Intereses(int IDUsuario, int IDCarrera) {
+    public Interes(int IDUsuario, int IDCarrera) {
         this.IDUsuario = IDUsuario;
         this.IDCarrera = IDCarrera;
     }   
 
-    public Intereses(int cantidad, Date fechaSeleccion) {
+    public Interes(int IDCarrera, int cantidad, String nombreCarrera) {
+        this.IDCarrera = IDCarrera;
+        this.cantidad = cantidad;
+        this.nombreCarrera = nombreCarrera;
+    }
+
+    public Interes(int cantidad, Date fechaSeleccion) {
         this.cantidad = cantidad;
         this.fechaSeleccion = fechaSeleccion;
     }
 
-    public Intereses(int cantidad, String nombreCarrera) {
+    public Interes(int cantidad, String nombreCarrera) {
         this.cantidad = cantidad;
         this.nombreCarrera = nombreCarrera;
     }
     
-    public Intereses(int IDInteres, String nombreCarrera, String descripcion) {
+    public Interes(int IDInteres, String nombreCarrera, String descripcion) {
         this.IDInteres = IDInteres;
         this.nombreCarrera = nombreCarrera;
         this.descripcion = descripcion;
     }
     
-    public Intereses(int IDInteres, int IDUsuario, int IDCarrera, Date fechaSeleccion) {
+    public Interes(int IDInteres, int IDUsuario, int IDCarrera, Date fechaSeleccion) {
         this.IDInteres = IDInteres;
         this.IDUsuario = IDUsuario;
         this.IDCarrera = IDCarrera;

@@ -4,10 +4,10 @@
  */
 package Formularios;
 
-import DAO.InteresesDAO;
+import DAO.InteresDAO;
 import DAO.UsuarioDAO;
 import Entidades.Carrera;
-import Entidades.Intereses;
+import Entidades.Interes;
 import Entidades.Usuario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -22,12 +22,11 @@ public class frmIntereses extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmIntereses
      */
-    private ArrayList<Intereses> listadoCarrerasDeInteres;
+    private ArrayList<Interes> listadoCarrerasDeInteres;
     private DefaultTableModel modeloCarreras;
-    private Intereses interesSeleccionado;
-    private UsuarioDAO usuarioDAO;
+    private Interes interesSeleccionado;
     private Usuario usuario;
-    private InteresesDAO interesesDAO;
+    private InteresDAO interesesDAO;
     
     public frmIntereses(Usuario usuario) {
         initComponents();
@@ -35,8 +34,8 @@ public class frmIntereses extends javax.swing.JInternalFrame {
         listadoCarrerasDeInteres = new ArrayList<>();
         modeloCarreras = (DefaultTableModel) this.jtCarreras.getModel();
         interesSeleccionado = null;
-        usuarioDAO = new UsuarioDAO();
-        interesesDAO = new InteresesDAO();
+        new UsuarioDAO();
+        interesesDAO = new InteresDAO();
         this.usuario = usuario;
         
         cargarCarrerasDeInteres();
@@ -47,7 +46,7 @@ public class frmIntereses extends javax.swing.JInternalFrame {
         this.modeloCarreras.setRowCount(0);
 
         for (int i = 0; i < this.listadoCarrerasDeInteres.size(); i++) {
-            Intereses interes = this.listadoCarrerasDeInteres.get(i);
+            Interes interes = this.listadoCarrerasDeInteres.get(i);
 
             String[] data = {
                 String.valueOf(interes.getIDInteres()),
@@ -62,7 +61,7 @@ public class frmIntereses extends javax.swing.JInternalFrame {
     }
     
     public boolean comprobarCarrera(Carrera carrera) {
-        for (Intereses i : listadoCarrerasDeInteres) {
+        for (Interes i : listadoCarrerasDeInteres) {
             if (i.getNombreCarrera().equals(carrera.getNombreCarrera())) {
                 return false;
             }
@@ -71,7 +70,7 @@ public class frmIntereses extends javax.swing.JInternalFrame {
     }
     
     public void insertarCarreraDeInteres(Carrera carrera){
-        Intereses carreraInteres = new Intereses(
+        Interes carreraInteres = new Interes(
                 usuario.getIDUsuario(),
                 carrera.getIDCarrera()
         );
@@ -210,7 +209,7 @@ public class frmIntereses extends javax.swing.JInternalFrame {
         String nombreCarrera = String.valueOf(this.jtCarreras.getValueAt(filaSeleccionada, 1));
         String descripcion = String.valueOf(this.jtCarreras.getValueAt(filaSeleccionada, 2));
 
-        interesSeleccionado = new Intereses(
+        interesSeleccionado = new Interes(
             IDInteres,
             nombreCarrera,
             descripcion

@@ -4,10 +4,10 @@
  */
 package Formularios;
 
-import DAO.InteresesDAO;
+import DAO.InteresDAO;
 import DAO.UsuarioDAO;
 import Entidades.Carrera;
-import Entidades.Intereses;
+import Entidades.Interes;
 import Entidades.Usuario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -26,7 +26,7 @@ public class frmRegistro extends javax.swing.JFrame {
     private DefaultTableModel modeloCarreras;
     private Carrera carreraSeleccionada;
     private UsuarioDAO usuarioDAO;
-    private InteresesDAO interesesDAO;
+    private InteresDAO interesesDAO;
     
     public frmRegistro() {
         initComponents();
@@ -35,7 +35,7 @@ public class frmRegistro extends javax.swing.JFrame {
         modeloCarreras = (DefaultTableModel) this.jtCarreras.getModel();
         carreraSeleccionada = null;
         usuarioDAO = new UsuarioDAO();
-        interesesDAO = new InteresesDAO();
+        interesesDAO = new InteresDAO();
         
         setLocationRelativeTo(null);
     }
@@ -427,7 +427,7 @@ public class frmRegistro extends javax.swing.JFrame {
                 int IDUsuarioNuevo = usuarioDAO.obtenerUltimoIDUsuario();
                 
                 for(int i = 0; i < listadoCarrerasDeInteres.size(); i++){
-                    Intereses intereses = new Intereses(                    
+                    Interes intereses = new Interes(                    
                             IDUsuarioNuevo,
                             listadoCarrerasDeInteres.get(i).getIDCarrera()
                     );

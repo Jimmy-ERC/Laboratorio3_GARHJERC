@@ -4,8 +4,8 @@
  */
 package Formularios;
 
-import DAO.InteresesDAO;
-import Entidades.Intereses;
+import DAO.InteresDAO;
+import Entidades.Interes;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -24,13 +24,13 @@ public class frmGraficoDePastel extends javax.swing.JInternalFrame {
      * Creates new form frmGraficoDePastel
      */
     
-    private InteresesDAO interesDAO;
-    private ArrayList<Intereses> listadoIntereses;
+    private InteresDAO interesDAO;
+    private ArrayList<Interes> listadoIntereses;
     
     public frmGraficoDePastel() {
         initComponents();
         
-        interesDAO = new InteresesDAO();
+        interesDAO = new InteresDAO();
         listadoIntereses = interesDAO.consultarCantidadInteresados();
         
         cargarGrafico();        
