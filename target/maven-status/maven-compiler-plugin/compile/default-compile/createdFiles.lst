@@ -1,5 +1,6 @@
 Formularios\frmConsultarCarerras$4.class
 Formularios\frmPerfil.class
+Formularios\frmEstudiante$11.class
 Formularios\frmEstudiante.class
 Formularios\frmUsuario$6.class
 Formularios\frmSeleccionarCarreraDesdeIntereses$2.class
@@ -35,6 +36,7 @@ Formularios\frmRegistro$1.class
 Formularios\frmCambiarContraseña$1.class
 Formularios\frmCarrera$6.class
 Entidades\Interes.class
+Formularios\frmEstudiante$10.class
 DB\cn.class
 Formularios\frmSeleccionarCarreraDesdeIntereses$3.class
 Formularios\frmUsuario$1.class
@@ -73,6 +75,7 @@ Formularios\frmEstudiante$1.class
 Formularios\frmSeleccionarCarreraDeInteresDesdeRegistro.class
 Formularios\frmSeleccionarCarreraDesdeIntereses$1.class
 Formularios\frmUsuario.class
+Formularios\frmEstudiante$12.class
 Formularios\frmRegistro$6.class
 Formularios\frmIntereses$2.class
 Formularios\frmPerfil$2.class

@@ -37,6 +37,8 @@ public class frmRegistro extends javax.swing.JFrame {
         usuarioDAO = new UsuarioDAO();
         interesesDAO = new InteresDAO();
         
+        this.cbRegion.setSelectedIndex(-1);
+        
         setLocationRelativeTo(null);
     }
 

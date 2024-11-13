@@ -70,12 +70,12 @@ public class frmEstudiante extends javax.swing.JFrame {
         jmiConsultarCarreras = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jmiIntereses = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jmiSalir = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
-        jmiGraficoBarras = new javax.swing.JMenuItem();
         jmiGraficoPastel = new javax.swing.JMenuItem();
         jmiGraficoLineas = new javax.swing.JMenuItem();
+        jmiGraficoBarras = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jmiSalir = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -141,7 +141,7 @@ public class frmEstudiante extends javax.swing.JFrame {
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jdpPrincipalLayout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 557, Short.MAX_VALUE))
+                .addGap(0, 558, Short.MAX_VALUE))
         );
 
         jMenu3.setText("Perfil");
@@ -180,27 +180,7 @@ public class frmEstudiante extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu6);
 
-        jMenu1.setText("Cerrar Sesión");
-
-        jmiSalir.setText("Salir");
-        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiSalirActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jmiSalir);
-
-        jMenuBar2.add(jMenu1);
-
         jMenu7.setText("Gráficos de interes");
-
-        jmiGraficoBarras.setText("Gráfico de barras");
-        jmiGraficoBarras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiGraficoBarrasActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jmiGraficoBarras);
 
         jmiGraficoPastel.setText("Gráfico de pastel");
         jmiGraficoPastel.addActionListener(new java.awt.event.ActionListener() {
@@ -218,7 +198,27 @@ public class frmEstudiante extends javax.swing.JFrame {
         });
         jMenu7.add(jmiGraficoLineas);
 
+        jmiGraficoBarras.setText("Gráfico de barras");
+        jmiGraficoBarras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiGraficoBarrasActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jmiGraficoBarras);
+
         jMenuBar2.add(jMenu7);
+
+        jMenu1.setText("Cerrar Sesión");
+
+        jmiSalir.setText("Salir");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiSalir);
+
+        jMenuBar2.add(jMenu1);
 
         setJMenuBar(jMenuBar2);
 

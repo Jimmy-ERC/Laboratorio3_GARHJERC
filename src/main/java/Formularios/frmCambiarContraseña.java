@@ -219,6 +219,7 @@ public class frmCambiarContraseña extends javax.swing.JInternalFrame {
 
                         if (usuarioDAO.editarUsuario(usuario)) {
                             frmPadre.setUsuario(usuario);
+                            this.dispose();
                         }
                     }
                     else {
