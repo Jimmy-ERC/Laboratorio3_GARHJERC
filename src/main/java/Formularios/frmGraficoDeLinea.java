@@ -76,7 +76,7 @@ public class frmGraficoDeLinea extends javax.swing.JInternalFrame {
         TimeSeriesCollection datos = cargarInteresados();
 
         JFreeChart graficoDeLinea = ChartFactory.createTimeSeriesChart(
-                "Evolución del interes de cada carrera", //Título
+                "Las 15 Carreras de Mayor Interes para los Estudiantes a Traves del Tiempo", //Título
                 "Fecha", //Título del X label
                 "Cantidad de interesados", //Título del Y label
                 datos, //Datos

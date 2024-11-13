@@ -50,9 +50,9 @@ public class frmGraficoDeBarra extends javax.swing.JInternalFrame {
         DefaultCategoryDataset datos = obtenerDatos();
         
         JFreeChart graficoDeBarra = ChartFactory.createBarChart3D(
-                "Cantidad de Interesados por Carrera",  //Nombre del gráfico
-                "Cantidad de Estudiantes Interesados",  //Nombre de las barras o columnas
-                "Carreras",                             //Nombre de la numeración
+                "Las 15 Carreras de Mayor Interes para los Estudiantes",  //Nombre del gráfico
+                "Carreras",  //Nombre de las barras o columnas
+                "Cantidad de Estudiantes Interesados",                             //Nombre de la numeración
                 datos,                                  //Datos del gráfico
                 PlotOrientation.VERTICAL,               //Orientación del gráfico
                 true,                                   //Leyenda de barrar individuales
