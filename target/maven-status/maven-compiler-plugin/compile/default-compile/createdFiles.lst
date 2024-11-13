@@ -15,6 +15,7 @@ Formularios\frmAdministrador$6.class
 DAO\CarreraDAO.class
 Formularios\frmEstudiante$7.class
 Formularios\frmSeleccionarCarreraDeInteresDesdeRegistro$2.class
+Formularios\frmCambiarContraseña$2.class
 Formularios\frmCarrera$5.class
 Formularios\frmAdministrador.class
 Formularios\frmLogin.class
@@ -31,6 +32,7 @@ Formularios\frmLogin$3.class
 Formularios\frmConsultarCarerras$1.class
 Formularios\frmGraficoDeLinea.class
 Formularios\frmRegistro$1.class
+Formularios\frmCambiarContraseña$1.class
 Formularios\frmCarrera$6.class
 Entidades\Interes.class
 DB\cn.class
@@ -42,6 +44,7 @@ DAO\InteresDAO.class
 Formularios\frmSeleccionarCarreraDeInteresDesdeRegistro$3.class
 Formularios\frmGraficoDeBarra.class
 DAO\UsuarioDAO.class
+Formularios\frmCambiarContraseña.class
 Entidades\Usuario.class
 Formularios\frmIntereses$4.class
 Formularios\frmCarrera$3.class
@@ -72,6 +75,7 @@ Formularios\frmSeleccionarCarreraDesdeIntereses$1.class
 Formularios\frmUsuario.class
 Formularios\frmRegistro$6.class
 Formularios\frmIntereses$2.class
+Formularios\frmPerfil$2.class
 Formularios\frmSeleccionarCarreraDeInteresDesdeRegistro$1.class
 Formularios\frmAdministrador$5.class
 Formularios\frmLogin$1.class

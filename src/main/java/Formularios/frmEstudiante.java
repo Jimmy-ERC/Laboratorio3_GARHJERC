@@ -72,6 +72,10 @@ public class frmEstudiante extends javax.swing.JFrame {
         jmiIntereses = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jmiSalir = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jmiGraficoBarras = new javax.swing.JMenuItem();
+        jmiGraficoPastel = new javax.swing.JMenuItem();
+        jmiGraficoLineas = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -188,6 +192,34 @@ public class frmEstudiante extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu1);
 
+        jMenu7.setText("Gráficos de interes");
+
+        jmiGraficoBarras.setText("Gráfico de barras");
+        jmiGraficoBarras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiGraficoBarrasActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jmiGraficoBarras);
+
+        jmiGraficoPastel.setText("Gráfico de pastel");
+        jmiGraficoPastel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiGraficoPastelActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jmiGraficoPastel);
+
+        jmiGraficoLineas.setText("Gráfico de líneas");
+        jmiGraficoLineas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiGraficoLineasActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jmiGraficoLineas);
+
+        jMenuBar2.add(jMenu7);
+
         setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -253,6 +285,24 @@ public class frmEstudiante extends javax.swing.JFrame {
         abrirFormulario(carreras);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jmiGraficoBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGraficoBarrasActionPerformed
+        // TODO add your handling code here:
+        frmGraficoDeBarra graficoDeBarra = new frmGraficoDeBarra();
+        abrirFormulario(graficoDeBarra);
+    }//GEN-LAST:event_jmiGraficoBarrasActionPerformed
+
+    private void jmiGraficoPastelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGraficoPastelActionPerformed
+        // TODO add your handling code here:
+        frmGraficoDePastel graficoDePastel = new frmGraficoDePastel();
+        abrirFormulario(graficoDePastel);
+    }//GEN-LAST:event_jmiGraficoPastelActionPerformed
+
+    private void jmiGraficoLineasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGraficoLineasActionPerformed
+        // TODO add your handling code here:
+        frmGraficoDeLinea graficoDeLinea = new frmGraficoDeLinea();
+        abrirFormulario(graficoDeLinea);
+    }//GEN-LAST:event_jmiGraficoLineasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -298,11 +348,15 @@ public class frmEstudiante extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JDesktopPane jdpPrincipal;
     private javax.swing.JMenuItem jmiConsultarCarreras;
+    private javax.swing.JMenuItem jmiGraficoBarras;
+    private javax.swing.JMenuItem jmiGraficoLineas;
+    private javax.swing.JMenuItem jmiGraficoPastel;
     private javax.swing.JMenuItem jmiIntereses;
     private javax.swing.JMenuItem jmiPerfil;
     private javax.swing.JMenuItem jmiSalir;
